@@ -16,20 +16,21 @@ def main():
         print("Ask for help. -h or --h")
         return
     
-    input = sys.argv[1]
+    input = args.str
     index = input.find("\citet")
     while index != -1:
         input = input[:index - 1] + input[index + 6 :]
-        index = input.find("citet")
+        index = input.find("\citet")
 
     start_index = input.find("{")
     end_index = input.find("}")
 
     while start_index != -1 and end_index != -1:
-        input = input[:start_index - 1] + input[end_index + 1:]
+        input = input[:start_index] + input[end_index + 1:]
         start_index = input.find("{")
         end_index = input.find("}")
 
+    print(input)
     words = input.split(" ")
     print(f"\nInput string has: {len(words)} words.\n") 
 

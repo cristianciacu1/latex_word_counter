@@ -10,9 +10,7 @@ def main():
     if not args.str:
         print("Ask for help. -h or --h")
         return
-    # if len(sys.argv) != 2:
-    #     print("Too many or too few params.")
-    #     return
+    
     input = sys.argv[1]
     index = input.find("\citet")
     while index != -1:

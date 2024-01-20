@@ -1,6 +1,11 @@
 import sys
 import argparse
 
+# How to use it?
+# python count_words.py -str=input_string
+
+# Example: python count_words.py -str='Hello!'
+
 def main():
     parser = argparse.ArgumentParser(description='Find the number of words from a Latex text.')
     parser.add_argument('-str', help='Input string', nargs='?', type=str, const=None)

@@ -17,10 +17,21 @@ def main():
         return
     
     input = args.str
+    
     index = input.find("\citet")
     while index != -1:
         input = input[:index - 1] + input[index + 6 :]
         index = input.find("\citet")
+
+    index = input.find("\citep")
+    while index != -1:
+        input = input[:index - 1] + input[index + 6 :]
+        index = input.find("\citep")
+        
+    index = input.find("\cite")
+    while index != -1:
+        input = input[:index - 1] + input[index + 5 :]
+        index = input.find("\cite")
 
     start_index = input.find("{")
     end_index = input.find("}")
@@ -30,7 +41,10 @@ def main():
         start_index = input.find("{")
         end_index = input.find("}")
 
-    print(input)
+    if (start_index == -1 and end_index != -1) or (start_index != -1 and end_index == -1):
+        print("There is a pair of {} which is not complete.")
+        return
+
     words = input.split(" ")
     print(f"\nInput string has: {len(words)} words.\n") 
 

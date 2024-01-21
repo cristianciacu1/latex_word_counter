@@ -18,28 +18,31 @@ def main():
     
     input = args.str
 
-    to_remove = ['\citet', '\citep', '\cite']
+    name_followed_by_curly_braces = ['\citet', '\citep', '\cite']
 
-    for keyword in to_remove:
+    for keyword in name_followed_by_curly_braces:
         index = input.find(keyword)
         while index != -1:
             input = input[:index - 1] + input[index + len(keyword) :]
+
+            start_index = input.find("{")
+            end_index = input.find("}")
+            
+            if (start_index == -1 and end_index != -1) or (start_index != -1 and end_index == -1):
+                print("There is a pair of {} which is not complete.")
+                return
+    
+            input = input[:start_index] + input[end_index + 1:]
+
             index = input.find(keyword)
 
-    start_index = input.find("{")
-    end_index = input.find("}")
-
-    while start_index != -1 and end_index != -1:
-        input = input[:start_index] + input[end_index + 1:]
-        start_index = input.find("{")
-        end_index = input.find("}")
-
-    if (start_index == -1 and end_index != -1) or (start_index != -1 and end_index == -1):
-        print("There is a pair of {} which is not complete.")
-        return
-
     words = input.split(" ")
-    print(f"\nInput string has: {len(words)} words.\n") 
+    counter = 0
+    for word in words:
+        if word:
+            counter += 1
+
+    print(f"\nInput string has: {counter} words.\n") 
 
 
 if __name__ == '__main__':

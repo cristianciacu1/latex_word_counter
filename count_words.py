@@ -6,18 +6,7 @@ import argparse
 
 # Example: python count_words.py -str='Hello!'
 
-def main():
-    parser = argparse.ArgumentParser(description='Find the number of words from a Latex text.')
-    parser.add_argument('-str', help='Input string', nargs='?', type=str, const=None)
-
-    args = parser.parse_args()
-
-    if not args.str:
-        print("Ask for help. -h or --h")
-        return
-    
-    input = args.str
-
+def count(input: str):
     name_followed_by_curly_braces = ['\citet', '\citep', '\cite']
 
     for keyword in name_followed_by_curly_braces:
@@ -42,7 +31,22 @@ def main():
         if word:
             counter += 1
 
-    print(f"\nInput string has: {counter} words.\n") 
+    print(f"\nInput string has: {counter} words.\n")
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Find the number of words from a Latex text.')
+    parser.add_argument('-str', help='Input string', nargs='?', type=str, const=None)
+
+    args = parser.parse_args()
+
+    if not args.str:
+        print("Ask for help. -h or --h")
+        return
+    
+    input = args.str
+
+    count(input)
 
 
 if __name__ == '__main__':

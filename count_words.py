@@ -17,21 +17,14 @@ def main():
         return
     
     input = args.str
-    
-    index = input.find("\citet")
-    while index != -1:
-        input = input[:index - 1] + input[index + 6 :]
-        index = input.find("\citet")
 
-    index = input.find("\citep")
-    while index != -1:
-        input = input[:index - 1] + input[index + 6 :]
-        index = input.find("\citep")
-        
-    index = input.find("\cite")
-    while index != -1:
-        input = input[:index - 1] + input[index + 5 :]
-        index = input.find("\cite")
+    to_remove = ['\citet', '\citep', '\cite']
+
+    for keyword in to_remove:
+        index = input.find(keyword)
+        while index != -1:
+            input = input[:index - 1] + input[index + len(keyword) :]
+            index = input.find(keyword)
 
     start_index = input.find("{")
     end_index = input.find("}")
